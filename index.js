@@ -10,16 +10,33 @@ const validateEmail = (email) => {
     return re.test(String(email).toLowerCase());
 }
 
+//helper funciton to get the badge and its color via a link (no ajax call is needed for this)
+function getBadge(license, GH, color, link) {
+    if (license !== 'None') {
+        return `[![GitHub license](https://img.shields.io/badge/license-${license}-${color}.svg)](https://github.com/${GH}/${link})`
+    } else {
+        return ``
+    }
+}
+
 // Prompt user function
 function prompUser() {
     return inquirer.prompt([
-      
+
         {
             type: "input",
             name: "github",
             message: "Enter your GitHub Username",
-            default:'mauricechouam'
+            default: 'mauricechouam'
         },
+
+        // this Color is for the badge in order to personalyse 
+        {
+            type: "list",
+            name: "color",
+            message: "What's your favorite color?",
+            choices: ["red", "green", "purple", "black", "magenta"]
+          },
         {
             type: "input",
             name: "Projecttitle",
@@ -32,7 +49,7 @@ function prompUser() {
             message: "Please write a short description of your project",
             default: 'README.md generator is a CLI app that is asking a user the series of questions and based on responses generates a README.md'
         },
-       
+
         {
             type: "input",
             name: "installation",
@@ -44,7 +61,7 @@ function prompUser() {
             name: "test",
             message: "What command should be run to  test your Programm?",
             default: "node index.js"
-          },
+        },
 
         {
             type: "input",
@@ -52,18 +69,22 @@ function prompUser() {
             message: "What does the user need to know about using the repo?",
             default: 'It is an open project and everyone can contribute'
         },
+
+        // the Licence will hepl to create the Badge
         {
             type: "list",
             name: "license",
             message: "What kind of license do you want ?",
             choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"]
-          },
+        },
+
         {
             type: "input",
             name: "Contributing",
             message: "Write something About Contributing to the Repo"
         },
-        { type: "input",
+        {
+            type: "input",
             name: "email",
             message: "Please type your email?",
             default: 'lansichouamou@gmail.com',
@@ -77,7 +98,7 @@ function prompUser() {
 function generateReadme(answer) {
     return `
 # ${answer.Projecttitle}
-${getBadge(answer.license, answer.github, answer.Projecttitle)}
+${getBadge(answer.license, answer.github, answer.color, answer.Projecttitle)}
 
  ## Project description
 ${answer.Description}
@@ -104,25 +125,22 @@ ${answer.usage}
 
 ${answer.contributing}
 
-
  ## Tests
  In order to test This Application run the command line :
  \'\'\'
- ${answer.Test}
+ ${answer.test}
  \'\'\'
 
- 
  ## Question
 My Contact :  [${answer.github}](https://github.com/mauricechouam) directly at ${answer.email}
 }
   `;
-    
-}
 
-prompUser()
-    .then(answer => {
-        const md = generateReadme(answer);
-        return writeFileAsync("README.md", md)
-    })
-    .then(() => console.log("successfully  generate README.md"))
-    .catch(err => console.log(err));
+    prompUser()
+        .then(answer => {
+            const md = generateReadme(answer);
+            return writeFileAsync("README.md", md)
+        })
+        .then(() => console.log("successfully  generate README.md"))
+        .catch(err => console.log(err));
+}
