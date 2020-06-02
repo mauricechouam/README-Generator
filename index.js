@@ -4,66 +4,70 @@ const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-// validator() repeats question if user leaves it blank
-const validator = (val) => {
-    if (val !== "") {
-        return true;
-    }
+// validation Email function to have User enter a valid Email Address
+const validateEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
 // Prompt user function
 function prompUser() {
     return inquirer.prompt([
-        {
-            type: "input",
-            name: "name",
-            message: "what you Name?"
-        },
+      
         {
             type: "input",
             name: "github",
-            message: "Enter your GitHub Username"
+            message: "Enter your GitHub Username",
+            default:'mauricechouam'
         },
         {
             type: "input",
             name: "Projecttitle",
-            message: "Enter the Project Title"
+            message: "Enter the Project Title",
+            default: 'README GENERATOR'
         },
         {
             type: "input",
             name: "Description",
-            message: "Enter the Project Description"
+            message: "Please write a short description of your project",
+            default: 'README.md generator is a CLI app that is asking a user the series of questions and based on responses generates a README.md'
         },
-        {
-            type: "input",
-            name: "userstory",
-            message: "Enter the User Story"
-        },
+       
         {
             type: "input",
             name: "installation",
-            message: "Give few step how to install your application "
+            message: "What command should be run to install dependencies?",
+            default: 'npm i'
         },
+        {
+            type: "input",
+            name: "test",
+            message: "What command should be run to  test your Programm?",
+            default: "node index.js"
+          },
 
         {
             type: "input",
             name: "usage",
-            message: "Write Usage"
+            message: "What does the user need to know about using the repo?",
+            default: 'It is an open project and everyone can contribute'
         },
         {
-            type: "input",
-            name: "License",
-            message: "what the Licence?"
-        },
+            type: "list",
+            name: "license",
+            message: "What kind of license do you want ?",
+            choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"]
+          },
         {
             type: "input",
             name: "Contributing",
-            message: "Write your Contribution"
+            message: "Write something About Contributing to the Repo"
         },
-        {
-            type: "input",
-            name: "Questions",
-            message: "Enter your Github email "
+        { type: "input",
+            name: "email",
+            message: "Please type your email?",
+            default: 'lansichouamou@gmail.com',
+            validate: validateEmail
         },
 
     ])
@@ -72,41 +76,53 @@ function prompUser() {
 // Function generateReadme
 function generateReadme(answer) {
     return `
-  # ${answer.Projecttitle}
+# ${answer.Projecttitle}
+${getBadge(answer.license, answer.github, answer.Projecttitle)}
 
-  ## Table of Contents ##
-  * [Project_description](#Project_description)
-  * [Installation](#Installation)
-  * [User_Story](#User_Story)
-  * [Usage]#(Usage)
-  * [Licence](#Wireframe)
-  * [Tasks](#Tasks)
-  * [Contributing](#Contributing)
-  * [Question](#Question)
-  
-  
-
-## Project description
+ ## Project description
 ${answer.Description}
 
+  ## Table of Contents ##
+  * [Installation](#Installation)
+  * [Usage](#Usage)
+  * [Licence](#Wireframe)
+  * [Contributing](#Contributing)
+  * [Tests](#Tests)
+  * [Question](#Question)
 
- ## User Story ## 
+## Installation
+To install necessary Dependencies, Run the following Command line :
 
- ${answer.userstory}
+\'\'\'
+${answer.installation}
+\'\'\'
+
+## Usage
+${answer.usage}
+
+## Contributing 
+
+${answer.contributing}
 
 
-  
+ ## Tests
+ In order to test This Application run the command line :
+ \'\'\'
+ ${answer.Test}
+ \'\'\'
+
+ 
+ ## Question
+My Contact :  [${answer.github}](https://github.com/mauricechouam) directly at ${answer.email}
+}
   `;
+    
 }
 
 prompUser()
-    .then(function (answer) {
-    const md = generateReadme(answer);
-    return writeFileAsync("README.md", md)
+    .then(answer => {
+        const md = generateReadme(answer);
+        return writeFileAsync("README.md", md)
     })
-    .then(function () {
-        console.log("successfully  generate README.md");
-    })
-    .catch(function (err) {
-        console.log(err);
-    })
+    .then(() => console.log("successfully  generate README.md"))
+    .catch(err => console.log(err));
