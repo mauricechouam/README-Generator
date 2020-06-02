@@ -41,7 +41,7 @@ function prompUser() {
             type: "input",
             name: "Projecttitle",
             message: "Enter the Project Title",
-            default: 'README GENERATOR'
+            default: 'README-Generator'
         },
         {
             type: "input",
@@ -133,8 +133,10 @@ ${answer.Contributing}
 
  ## Question
 My Contact :  [${answer.github}](https://github.com/mauricechouam) directly at ${answer.email}
-}
+        https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4 
+
   `;
+}
 
     prompUser()
         .then(answer => {
@@ -143,4 +145,4 @@ My Contact :  [${answer.github}](https://github.com/mauricechouam) directly at $
         })
         .then(() => console.log("successfully  generate README.md"))
         .catch(err => console.log(err));
-}
+
