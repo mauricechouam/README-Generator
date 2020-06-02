@@ -123,7 +123,7 @@ ${answer.usage}
 
 ## Contributing 
 
-${answer.contributing}
+${answer.Contributing}
 
  ## Tests
  In order to test This Application run the command line :
