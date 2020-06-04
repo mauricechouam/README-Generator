@@ -85,6 +85,12 @@ function prompUser() {
         },
         {
             type: "input",
+            name: "picture",
+            message: "Provide your Github Profil Picture link ",
+            default: 'https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4'
+        },
+        {
+            type: "input",
             name: "email",
             message: "Please type your email?",
             default: 'lansichouamou@gmail.com',
@@ -133,10 +139,12 @@ ${answer.Contributing}
  ## Question
 
 My Contact :
-![GitHub Logo](https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4)
-Format: ![Alt Text](url)
-- Github Account :  [${answer.github}](https://github.com/mauricechouam)
+
+<img src="https://github.com/${answer.github}.png" alt="GitHub Profile Pic" width="125" height="125">
+
+- Github Account :  [${answer.github}](https://github.com/${answer.github})
 - Email Address :  ${answer.email}
+
 
   `;
 }

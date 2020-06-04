@@ -1,6 +1,6 @@
 
 # README-Generator
-[![GitHub license](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/mauricechouam/README-Generator)
+[![GitHub license](https://img.shields.io/badge/license-BSD 3-black.svg)](https://github.com/mauricechouam/README-Generator)
 
  ## Project description
 README.md generator is a CLI app that is asking a user the series of questions and based on responses generates a README.md
@@ -35,9 +35,11 @@ It is an open project and everyone can contribute
  ## Question
 
 My Contact :
-![GitHub Logo](https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4)
-Format: ![Alt Text](https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4)
+
+<img src="https://github.com/mauricechouam.png" alt="GitHub Profile Pic" width="125" height="125">
+
 - Github Account :  [mauricechouam](https://github.com/mauricechouam)
 - Email Address :  lansichouamou@gmail.com
+
 
   
