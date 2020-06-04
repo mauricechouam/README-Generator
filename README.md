@@ -1,6 +1,7 @@
 
 # README-Generator
-[![GitHub license](https://img.shields.io/badge/license-BSD 3-black.svg)](https://github.com/mauricechouam/README-Generator)
+
+[![GitHub license]https://img.shields.io/badge/licence-BSD3.0-magenta] (https://github.com/mauricechouam/README-Generator)
 
  ## Project description
 README.md generator is a CLI app that is asking a user the series of questions and based on responses generates a README.md

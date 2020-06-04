@@ -13,7 +13,8 @@ const validateEmail = (email) => {
 //helper funciton to get the badge and its color via a link (no ajax call is needed for this)
 function getBadge(license, GH, color, link) {
     if (license !== 'None') {
-        return `[![GitHub license](https://img.shields.io/badge/license-${license}-${color}.svg)](https://github.com/${GH}/${link})`
+        return `[![GitHub license](https://img.shields.io/badge/-${license}-${color}.svg)](https://github.com/${GH}/${link})`
+           
     } else {
         return ``
     }
@@ -22,21 +23,6 @@ function getBadge(license, GH, color, link) {
 // Prompt user function
 function prompUser() {
     return inquirer.prompt([
-
-        {
-            type: "input",
-            name: "github",
-            message: "Enter your GitHub Username",
-            default: 'mauricechouam'
-        },
-
-        // this Color is for the badge in order to personalyse 
-        {
-            type: "list",
-            name: "color",
-            message: "What's your favorite color?",
-            choices: ["red", "green", "purple", "black", "magenta"]
-          },
         {
             type: "input",
             name: "Projecttitle",
@@ -69,15 +55,6 @@ function prompUser() {
             message: "What does the user need to know about using the repo?",
             default: 'It is an open project and everyone can contribute'
         },
-
-        // the Licence will hepl to create the Badge
-        {
-            type: "list",
-            name: "license",
-            message: "What kind of license do you want ?",
-            choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"]
-        },
-
         {
             type: "input",
             name: "Contributing",
@@ -85,10 +62,11 @@ function prompUser() {
         },
         {
             type: "input",
-            name: "picture",
-            message: "Provide your Github Profil Picture link ",
-            default: 'https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4'
+            name: "github",
+            message: "Enter your GitHub Username",
+            default: 'mauricechouam'
         },
+      
         {
             type: "input",
             name: "email",
@@ -96,6 +74,20 @@ function prompUser() {
             default: 'lansichouamou@gmail.com',
             validate: validateEmail
         },
+        // the Licence will hepl to create the Badge
+        {
+            type: "list",
+            name: "license",
+            message: "What kind of license do you want ?",
+            choices: ["MIT", "APACHE-2.0", "GPL", "BSD3.0", "None"]
+        },
+           // this Color is for the badge in order to personalyse 
+           {
+            type: "list",
+            name: "color",
+            message: "What's your favorite color?",
+            choices: ["red", "green", "purple", "black", "magenta"]
+          },
 
     ])
 }
@@ -104,7 +96,8 @@ function prompUser() {
 function generateReadme(answer) {
     return `
 # ${answer.Projecttitle}
-${getBadge(answer.license, answer.github, answer.color, answer.Projecttitle)}
+
+[![GitHub license]https://img.shields.io/badge/licence-${answer.license}-${answer.color}] (https://github.com/${answer.github}/${answer.Projecttitle})
 
  ## Project description
 ${answer.Description}
