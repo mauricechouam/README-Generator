@@ -4,7 +4,7 @@ const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-// validation Email function to have User enter a valid Email Address
+// validation Email function to have User enter a valid Email Address.
 const validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -137,13 +137,12 @@ My Contact :
 - Github Account :  [${answer.github}](https://github.com/${answer.github})
 - Email Address :  ${answer.email}
 
-
   `;
 }
 
     prompUser()
         .then(answer => {
-            const md = generateReadme(answer);
+          const md = generateReadme(answer);
             return writeFileAsync("README.md", md)
         })
         .then(() => console.log("successfully  generate README.md"))
