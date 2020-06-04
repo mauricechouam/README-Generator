@@ -11,9 +11,9 @@ const validateEmail = (email) => {
 }
 
 //helper funciton to get the badge and its color via a link (no ajax call is needed for this)
-function getBadge(license, GH, color, link) {
+function getBadge(license,color,gitname,reponame) {
     if (license !== 'None') {
-        return `[![GitHub license](https://img.shields.io/badge/-${license}-${color}.svg)](https://github.com/${GH}/${link})`
+        return `[![GitHub license](https://img.shields.io/badge/licence-${license}-${color})](https://github.com/${gitname}/${reponame})`
            
     } else {
         return ``
@@ -96,8 +96,7 @@ function prompUser() {
 function generateReadme(answer) {
     return `
 # ${answer.Projecttitle}
-
-[![GitHub license]https://img.shields.io/badge/licence-${answer.license}-${answer.color}] (https://github.com/${answer.github}/${answer.Projecttitle})
+${getBadge(answer.license,answer.color,answer.github,answer.Projecttitle)}
 
  ## Project description
 ${answer.Description}
