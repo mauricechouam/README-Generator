@@ -122,18 +122,21 @@ ${answer.installation}
 ${answer.usage}
 
 ## Contributing 
-
 ${answer.Contributing}
 
  ## Tests
  In order to test This Application run the command line :
+
  \'\'\'
  ${answer.test}
  \'\'\'
-
  ## Question
-My Contact :  [${answer.github}](https://github.com/mauricechouam) directly at ${answer.email}
-        https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4 
+
+My Contact :
+![GitHub Logo](https://avatars3.githubusercontent.com/u/62573158?s=460&u=423516f27dadb302598e0c94ab658623a5637a71&v=4)
+Format: ![Alt Text](url)
+- Github Account :  [${answer.github}](https://github.com/mauricechouam)
+- Email Address :  ${answer.email}
 
   `;
 }
